@@ -1,0 +1,6 @@
+column. var_name. var_type
+1 x1 c
+2 x2 c
+3 x3 n
+4 x4 n
+5 x5 d
