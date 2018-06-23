@@ -1,0 +1,61 @@
+﻿Old_Name,New_Name
+Abalone,Abalone
+AirQuality,Air Quality
+AirfoilSelfNoise,Airfoil Self-Noise
+Ais,Ais
+Alcohol,Alcohol
+Amenity,Amenity
+Attend,Attend
+AutoMPG,Auto MPG
+Automobile,Automobile
+Baseball,Baseball
+Baskball,Basketball
+BeijingPM25,Beijing PM2.5
+Boston,Boston
+Budget,Budget
+Cane,Cane
+Cardio,Cardio
+College,College
+CommunityCrime,Communities Crime
+ComputerHardware,Computer Hardware
+ConcreteCompressiveStrength,Concrete Strength
+ConcreteSlumpTest,Concrete Slump Test
+Cps,Cps
+Cpu,Cpu
+CyclePowerPlant,Cycle Power Plant
+Deer,Deer
+Diabetes,Diabetes
+Diamond,Diamond
+Edu,Edu
+EnergyEfficiency,Energy Efficiency
+Enroll,Enroll
+FacebookMetrics,Facebook Metrics
+Fame,Fame
+Fat,Fat
+Fishery,Fishery
+FiveCitiesPM25,Hatco
+Hatco,Hydrodynamics
+Hydrodynamics,Insur
+Insur,Istanbul Stock
+IstanbulStock,Laheart
+Laheart,Medicare
+Medicare,Mpg
+Mpg,Mumps
+Mumps,Mussels
+Mussels,Naval Propulsion Plants
+Naval Propulsion Plants,Ozone
+Ozone,Parkinsons
+Parkinsons,PM2.5 of Five Cities
+Price,Price
+Protein,Protein Structure
+Rate,Rate
+Rice,Rice
+SML2010,Scenic
+Scenic,Servo
+Servo,SML2010
+Smsa,Smsa
+Strike,Strike
+Tecator,Tecator
+Tree,Tree
+Triazine,Triazine
+Wage,Wage
