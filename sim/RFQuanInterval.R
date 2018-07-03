@@ -1,4 +1,4 @@
-RFQuanInterval <- function(x, y, x0, alpha = 0.10,
+RFQuanInterval <- function(x, y, x0, alpha = 0.10, ntree = 500,
                           mtry = if (!is.null(y) && !is.factor(y))
                             max(floor(ncol(x)/3), 1) else floor(sqrt(ncol(x))),
                           nodesize = if (!is.null(y) && !is.factor(y)) 5 else 1){
@@ -12,7 +12,7 @@ RFQuanInterval <- function(x, y, x0, alpha = 0.10,
   
   ntest = nrow(x0)
 
-  quanrf = quantregForest(x, y, mtry = mtry, nodesize = nodesize)
+  quanrf = quantregForest(x, y, mtry = mtry, nodesize = nodesize,ntree = ntree)
   
   return(list(lo = matrix(predict(quanrf, x0, alpha/2), ntest, 1), 
               up = matrix(predict(quanrf, x0, 1-alpha/2), ntest, 1)))

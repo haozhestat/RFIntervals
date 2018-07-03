@@ -38,6 +38,5 @@ RFOOBInterval <- function(x, y, x0, ntree = 500, alpha = 0.10, symmetry = TRUE,
   return(list(pred = matrix(test_pred,ntest,1),
               lo = matrix(lower_pred,ntest,1), 
               up = matrix(upper_pred,ntest,1), 
-              fit = matrix(predict(rf,x),n,1),
-              oob = oob_error))
+              fit = matrix(predict(rf,x),n,1)))
 }

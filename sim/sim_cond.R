@@ -20,8 +20,39 @@ sim_cond <- function(n = 500,
     length_quantile_interval <-
     matrix(NA, nrep, nrow(x0))
   
-  x_train_collection <- matrix(NA, nrep*n,p)
-  oob_collection <- rep(nrep*n)
+  if(tune){
+    cv_tune <- data.frame(nodesize = c(1,1,1,5,5,5),
+                          mtry = rep(c(max(ceiling(floor(p/3)/2),1),
+                                       max(floor(p/3),1),
+                                       max(floor(p/3),1)*2),2),
+                          cv_error = rep(0,6))
+    for(j in 1:5){
+      data <- sim_data(n = (n+n0), p = p, rho = rho, x0 = NULL, predictor_dist = predictor_dist,
+                       mean_function = mean_function, error_dist = error_dist)
+      x_train <- data$x[1:n,]
+      y_train <- data$y[1:n]
+      x_test <-  data$x[(n+1):(n+n0),]
+      y_test <-  data$y[(n+1):(n+n0)]
+      
+      for(index in 1:nrow(cv_tune)){
+        nodesize = cv_tune$nodesize[index]
+        mtry = cv_tune$mtry[index]
+        rf = randomForest(x=x_train, y=y_train, ntree=ntree, mtry = mtry, nodesize = nodesize)
+        test_pred <- predict(rf, x_test)
+        cv_tune$cv_error[index] <- cv_tune$cv_error[index] + mean(abs(y_test - test_pred))
+      }
+    }
+    
+    nodesize = cv_tune$nodesize[which.min(cv_tune$cv_error)]
+    mtry = cv_tune$mtry[which.min(cv_tune$cv_error)]
+    print(c(nodesize, mtry))
+  }
+  else{
+    mtry = if (!is.null(y_train) && !is.factor(y_train))
+      max(floor(ncol(x_train)/3), 1) else floor(sqrt(ncol(x_train)))
+    nodesize = if (!is.null(y_train) && !is.factor(y_train)) 5 else 1
+  }
+  
   
   for(k in 1:nrep){
     print(paste0("Start loop ", k, " :"))
@@ -37,38 +68,21 @@ sim_cond <- function(n = 500,
     y_test <- data$y0
     mx0 <- data$mx0
     
-    mtry = if (!is.null(y_train) && !is.factor(y_train))
-      max(floor(ncol(x_train)/3), 1) else floor(sqrt(ncol(x_train)))
-    nodesize = if (!is.null(y_train) && !is.factor(y_train)) 5 else 1
-    
-    if(tune){
-      if(k==1){
-        tuning <- expand.grid(mtry = seq(1,p,2), nodesize = c(1,3,5))
-        tuning$oob_error <- NA
-        for(i in 1:nrow(tuning)){
-          rf_fit <- randomForest(x_train, y_train, mtry=tuning$mtry[i], nodesize = tuning$nodesize[i])
-          tuning$oob_error[i] <- mean((rf_fit$predicted-y_train)^2)
-        }
-        mtry = tuning$mtry[which.min(tuning$oob_error)]
-        nodesize = tuning$nodesize[which.min(tuning$oob_error)]
-      }
-    }
+    my.rf.funs = rf.funs(ntree = ntree, mtry = mtry, nodesize = nodesize)
     
     conformal_split <-  conformal.pred.split(x_train, y_train, x_test,
                                              alpha = alpha, verb= FALSE,
                                              train.fun=my.rf.funs$train,
                                              predict.fun=my.rf.funs$predict)
     
-    oob_interval <- RFOOBInterval(x_train, y_train, x_test, alpha = alpha, symmetry = FALSE, mtry=mtry, nodesize=nodesize)
-    quantile_interval <- RFQuanInterval(x_train, y_train, x_test, alpha = alpha, mtry=mtry, nodesize=nodesize)
-    
-    x_train_collection[(n*(k-1)+1):(n*k),] <- data$x
-    oob_collection[(n*(k-1)+1):(n*k)] <- oob_interval$oob
-    
+    oob_interval <- RFOOBInterval(x_train, y_train, x_test, alpha = alpha, symmetry = TRUE,
+                                  ntree = ntree, mtry=mtry, nodesize=nodesize)
+    quantile_interval <- RFQuanInterval(x_train, y_train, x_test, alpha = alpha,
+                                        ntree = ntree, mtry=mtry, nodesize=nodesize)
     
     if(error_dist == "homoscedastic"){
       coverage_conformal_split[k,] <-
-        pnorm(conformal_split$up - mx0) - pnorm(conformal_split$lo - mx0)
+        pnorm(conformal_split$up - mx0) -pnorm(conformal_split$lo - mx0)
       coverage_oob_interval[k,] <-
         pnorm(oob_interval$up - mx0) -pnorm(oob_interval$lo - mx0)
       coverage_quantile_interval[k,] <-
@@ -80,7 +94,7 @@ sim_cond <- function(n = 500,
       coverage_oob_interval[k,] <-
         pt(oob_interval$up - mx0, df = 2) -pt(oob_interval$lo - mx0, df = 2)
       coverage_quantile_interval[k,] <-
-        pt(quantile_interval$up - mx0, df = 2) - pt(quantile_interval$lo - mx0, df = 2)
+        pt(quantile_interval$up - mx0, df = 2) -pt(quantile_interval$lo - mx0, df = 2)
     }
     else{
       coverage_conformal_split[k,] <-
@@ -105,7 +119,5 @@ sim_cond <- function(n = 500,
               coverage_quantile_interval,
               length_oob_interval,
               length_conformal_split,
-              length_quantile_interval,
-              x_train_collection,
-              oob_collection))
+              length_quantile_interval))
 }

@@ -34,8 +34,8 @@ coverage_conformal_split <-
 x <- data.matrix(read.table(paste0('UCI/','ConcreteCompressiveStrength','/x.txt'),head=F))
 y <- scan(paste0('UCI/','ConcreteCompressiveStrength','/y.txt'),0)
 
-for(nodesize in c(1,5)){
-  for(mtry in c(2,3,6)){
+for(nodesize in c(1)){
+  for(mtry in c(8)){
     for(k in 1:n_rep){
       partitions <- cvFolds(length(y), K=Kfold)
       for(j in 1:Kfold){
@@ -81,4 +81,5 @@ for(nodesize in c(1,5)){
     
   }
 }
+
 

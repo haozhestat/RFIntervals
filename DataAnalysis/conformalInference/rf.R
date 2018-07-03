@@ -64,3 +64,4 @@ rf.funs = function(ntree=500, varfrac=0.333, replace=TRUE,
               active.fun=active.fun))
 }
 
+
