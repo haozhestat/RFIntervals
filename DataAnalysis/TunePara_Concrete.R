@@ -1,18 +1,11 @@
-#setwd("/Users/haozhe/Documents/RFInterval/DataAnalysis/")
 setwd("~/RFInterval/DataAnalysis/")
 
-#library(devtools)
-#install_github(repo="ryantibs/conformal", subdir="conformalInference")
 library(randomForest)
 library(quantregForest)
-#library(caret)
+library(caret)
 library(cvTools)
-#library(conformalInference)
 for(i in 1:16)
   source(system("ls ~/RFInterval/DataAnalysis/conformalInference/*.R", intern = TRUE)[i])
-  #source(system("ls /Users/haozhe/Documents/RFInterval/DataAnalysis/conformalInference/*.R", intern = TRUE)[i])
-#my.rf.funs = rf.funs()
-#library(randomForestCI)
 
 source("RFOOBInterval.R")
 source("RFQuanInterval.R")
@@ -68,7 +61,6 @@ for(nodesize in c(1,5)){
                      "Conformal: ", coverage_conformal_split[k,j], ";",
                      "Quantile: ", coverage_quantile_interval[k,j], ";"))
       }
-      print(k)
     }
     data_result <- list(coverage_oob_interval = coverage_oob_interval,
                         coverage_conformal_split = coverage_conformal_split,

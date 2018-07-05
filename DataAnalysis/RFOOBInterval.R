@@ -1,4 +1,9 @@
-RFOOBInterval <- function(x, y, x0, ntree = 500, alpha = 0.10, symmetry = TRUE,
+RFOOBInterval <- function(x, 
+                          y, 
+                          x0, 
+                          ntree = 1000, 
+                          alpha = 0.10, 
+                          symmetry = TRUE,
                           mtry = if (!is.null(y) && !is.factor(y))
                             max(floor(ncol(x)/3), 1) else floor(sqrt(ncol(x))), 
                           nodesize = if (!is.null(y) && !is.factor(y)) 5 else 1){
@@ -21,6 +26,9 @@ RFOOBInterval <- function(x, y, x0, ntree = 500, alpha = 0.10, symmetry = TRUE,
   
   upper_pred = rep(NA, ntest)
   lower_pred = rep(NA, ntest)
+  
+  ## symmetry = TRUE leads to the symmetric OOB Intervals
+  ## symmetry = FALSE leads to the standard OOB Intervals
   if(symmetry){
     for (i in 1:ntest){
       upper_pred[i] = test_pred[i] + quantile(oob_abs_error,1-alpha)

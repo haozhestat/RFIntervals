@@ -1,4 +1,4 @@
-setwd("~/Documents/RFInterval/DataAnalysis/TunePara_Concrete_output/")
+setwd("~/RFInterval/DataAnalysis/TunePara_Concrete_output/")
 
 output_list <- system("ls", intern = TRUE)
 
@@ -38,7 +38,6 @@ plot_coverage <-
                aes(x=method, y = coverage),
                shape=2, size=2, position=position_dodge(width=0.75))+
   geom_hline(yintercept = 0.9, linetype="dashed")+
-  #theme(legend.position = "bottom", legend.title = element_blank()) +
   xlab("Method") + ylab("Interval coverage rate")
 plot_coverage
 ggsave("~/Documents/Paper/manuscript_v5/figures/DataAnalysis_TunePara_Coverage.pdf",
@@ -51,14 +50,10 @@ out_marg_len$method <-
   mapvalues(out_marg_len$method, from = c("OOB.len", "Conformal.len", "Quantile.len"), 
             to = c("OOB", "CONF", "QRF"))
 
-#out_marg_len <- subset(out_marg_len, length<30)
 plot_width <- 
   ggplot(out_marg_len) + 
   geom_boxplot(aes(x = method, y = Width), outlier.size = 0.5) +
   facet_wrap(nodesize~mtry)+
-  #facet_wrap(~mean_function+error_dist, scales="free_y")+
-  #geom_hline(yintercept = 1, linetype="dashed")+
-  # theme(legend.position = "bottom", legend.title = element_blank()) +
   ylab("Interval width") + xlab("Method")
 plot_width
 ggsave("~/Documents/Paper/manuscript_v5/figures/DataAnalysis_TunePara_Width.pdf",

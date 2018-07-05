@@ -1,5 +1,0 @@
-column. var_name. var_type
-1 x1 n
-2 x2 n
-3 x3 n
-4 x4 d
