@@ -32,8 +32,8 @@ sim_data <- function(n = 500,
     epsilon <- rt(n, df = 2)
   else if(error_dist == "heteroscedastic")
     epsilon <- rnorm(n, mean = 0, sd = sqrt(1+abs(mx)/mean(abs(mx))))
-  else if(error_dist == "skewed")
-    epsilon <- exp(rnorm(n, mean = 0,sd = sqrt(0.5))) - exp(0.25)
+  #else if(error_dist == "skewed")
+  #  epsilon <- exp(rnorm(n, mean = 0,sd = sqrt(0.5))) - exp(0.25)
 
   if(!is.null(x0)){
     x0 <- matrix(x0, ncol = p)

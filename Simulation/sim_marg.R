@@ -19,6 +19,7 @@ sim_marg <- function(n = 500,
     length_quantile_interval <-
     rep(NA, nrep)
   
+  ## 5-fold cross validation for selecting tuning parameters
   if(tune){
       cv_tune <- data.frame(nodesize = c(1,1,1,5,5,5),
                             mtry = rep(c(max(ceiling(floor(p/3)/2),1),
