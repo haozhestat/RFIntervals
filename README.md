@@ -4,7 +4,7 @@ This repository contains R code and 60 datasets to reproduce the simulation stud
 
 A R package "RFIntervals" is under development. This package will produce out-of-bag prediction intervals, split conformal prediction intervals, and quantile regression forest intervals for random forest predictions, as well as random forest confidence intervals for estimated model mean functions.
 
-Some key R files
+Some key R files:
 
 1. 'RFOOBInterval.R' is a function that generates out-of-bag prediction intervals for test cases given a training sample;
 2. 'RFQuanInterval.R' is a function that generates quantile regression forest intervals for test cases given a training sample;
@@ -17,6 +17,7 @@ Some key R files
 9. 'uci_main.R' is used to analyze the 20 datasets from UCI ML Repository;
 10. 'nipsdata_main.R' is used to analyze 40 datasets from Chipman et al. (2010).
 
+
 Related references
 
 - "Distribution-Free Predictive Inference for Regression" by Jing Lei, Max G'Sell, Alessandro Rinaldo, Ryan Tibshirani, and  Larry Wasserman,Journal of the American Statistical Association, just-accepted (2017).
@@ -27,4 +28,4 @@ Related references
 
 - "Quantifying uncertainty in random forests via confidenceintervals and hypothesis tests" by Lucas Mentch and Giles Hooker,  The Journal of Machine Learning Research, 2016, 17(1), 841-881.
 
-- "Bart: Bayesian additive regression trees" by Chipman, Hugh A., Edward I. George, and Robert E. McCulloch, The Annals of Applied Statistics, 2010, 4(1),266-298.
+- "Bart: Bayesian additive regression trees" by Chipman, Hugh A., Edward I. George, and Robert E. McCulloch, The Annals of Applied Statistics, 2010, 4(1), 266-298.
