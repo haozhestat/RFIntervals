@@ -4,6 +4,18 @@ This repository contains R code and 60 datasets to reproduce the simulation stud
 
 A R package "RFIntervals" is under development. This package will produce out-of-bag prediction intervals, split conformal prediction intervals, and quantile regression forest intervals for random forest predictions, as well as random forest confidence intervals for estimated model mean functions.
 
+Some key R files
+
+1. 'RFOOBInterval.R'
+2. 'RFQuanInterval.R'
+3. 'sim_data.R'
+4. 'sim_marg.R'
+5. 'sim_cond.R'
+6. 'sim_summary.R'
+7. 'DataAnalysis_summary.R'
+8. 'TunePara_Concrete.R'
+9. 'uci_main.R'
+10. 'nipsdata_main.R'
 
 Related references
 
