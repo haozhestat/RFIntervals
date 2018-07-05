@@ -1,5 +1,6 @@
 # Random Forest Prediction Intervals
-The R code and datasets for the paper "Random Forest Prediction Intervals"
+
+This repository contains R code and 60 datasets to reproduce the simulation studies and data analysis in the paper "Random Forest Prediction Intervals" by Haozhe Zhang, Joshua Zimmerman, Dan Nettleton, and Daniel J. Nordman.
 
 Related references
 
