@@ -1,8 +1,8 @@
 # Random Forest Prediction Intervals
 
-This repository contains R code and 60 datasets to reproduce the simulation studies and data analysis in the paper "Random Forest Prediction Intervals" by Haozhe Zhang, Joshua Zimmerman, Dan Nettleton, and Daniel J. Nordman.
+This repository contains R code and 60 datasets to reproduce the simulation studies and data analysis in the paper "Random Forest Prediction Intervals" published in *The American Statistician* by Haozhe Zhang, Joshua Zimmerman, Dan Nettleton, and Daniel J. Nordman.
 
-An R package "RFIntervals" is under development. This package will produce out-of-bag prediction intervals, split conformal prediction intervals, and quantile regression forest intervals for random forest predictions, as well as random forest confidence intervals for estimated model mean functions.
+An R package "RFIntervals" is under development, expected to release by the early of 2019. This package will produce out-of-bag prediction intervals, split conformal prediction intervals, and quantile regression forest intervals for random forest predictions, as well as random forest confidence intervals for estimated model mean functions.
 
 Some key R files:
 
